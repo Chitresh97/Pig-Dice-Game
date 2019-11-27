@@ -9,41 +9,44 @@ GAME RULES:
 
 */
 
-var currentPlayer=0;
-var roundScore=0
-var scores=[0,0]
-//Reset overall scores to 0
-document.getElementById('score-0').textContent='0';
-document.getElementById('score-1').textContent='0';
-
-//Reset current scores to 0
-document.getElementById('current-0').textContent='0';
-document.getElementById('current-1').textContent='0';
-
-//Hide dice
-document.querySelector('.dice').style.display="none";
+var currentPlayer, roundScore, scores;
+init();
 
 //Roll Dice button on click function
-document.querySelector('.btn-roll').addEventListener('click',function(){
-    
-    var dice = Math.floor(Math.random()*6)+1;
-    document.querySelector('.dice').style.display="block";
-    document.querySelector('.dice').src="dice-"+dice+".png";
-    if(dice!==1){
-        roundScore=roundScore+dice;
-        document.getElementById('current-'+ currentPlayer).textContent=roundScore;
+document.querySelector(".btn-roll").addEventListener("click", function() {
+  dice = Math.floor(Math.random() * 6) + 1;
+  document.querySelector(".dice").style.display = "block";
+  document.querySelector(".dice").src = "dice-" + dice + ".png";
 
-    } else {
-        roundScore=0;
-        document.getElementById('current-0').textContent='0';
-        document.getElementById('current-1').textContent='0';
-        currentPlayer === 0 ? currentPlayer = 1 : currentPlayer === 0;
-        document.querySelector('.player-0-panel').classList.toggle('.ctive');
-        document.querySelector('.player-1-panel').classList.toggle('.active');
-
-
-    }
-
-
-
+  if (dice !== 1) {
+    roundScore = roundScore + dice;
+    document.getElementById(
+      "current-" + currentPlayer
+    ).textContent = roundScore;
+  } else {
+    roundScore = 0;
+    document.getElementById("current-0").textContent = "0";
+    document.getElementById("current-1").textContent = "0";
+    currentPlayer === 0 ? (currentPlayer = 1) : currentPlayer === 0;
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+  }
 });
+
+document.querySelector(".btn-hold").addEventListener("click", function() {});
+
+function init() {
+  currentPlayer = 0;
+  roundScore = 0;
+  scores = [0, 0];
+  //Reset overall scores to 0
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+
+  //Reset current scores to 0
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+
+  //Hide dice
+  document.querySelector(".dice").style.display = "none";
+}
