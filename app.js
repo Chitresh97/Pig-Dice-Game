@@ -25,15 +25,34 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
     ).textContent = roundScore;
   } else {
     roundScore = 0;
-    document.getElementById("current-0").textContent = "0";
-    document.getElementById("current-1").textContent = "0";
-    currentPlayer === 0 ? (currentPlayer = 1) : currentPlayer === 0;
-    document.querySelector(".player-0-panel").classList.toggle("active");
-    document.querySelector(".player-1-panel").classList.toggle("active");
+    changePlayer();
   }
 });
 
-document.querySelector(".btn-hold").addEventListener("click", function() {});
+//Hold button on click function
+document.querySelector(".btn-hold").addEventListener("click", function() {
+  scores[currentPlayer] = scores[currentPlayer] + roundScore;
+  roundScore = 0;
+
+  document.getElementById("score-" + currentPlayer).textContent =
+    scores[currentPlayer];
+
+  if (scores[currentPlayer] >= 20) {
+    document
+      .querySelector(".player-" + currentPlayer + "-panel")
+      .classList.add("winner");
+    document
+      .querySelector(".player-" + currentPlayer + "-panel")
+      .classList.remove("active");
+    document.getElementById("name-" + currentPlayer).textContent = "WINNER!";
+    document.querySelector(".dice").style.display = "none";
+  } else {
+    changePlayer();
+  }
+});
+
+//New Game button on click function
+document.querySelector(".btn-new").addEventListener("click", init);
 
 function init() {
   currentPlayer = 0;
@@ -49,4 +68,22 @@ function init() {
 
   //Hide dice
   document.querySelector(".dice").style.display = "none";
+
+  document.getElementById("name-0").textContent = "PLAYER 1";
+  document.getElementById("name-1").textContent = "PLAYER 2";
+
+  document.querySelector(".player-0-panel").classList.remove("winner");
+  document.querySelector(".player-1-panel").classList.remove("winner");
+  document.querySelector(".player-0-panel").classList.remove("active");
+  document.querySelector(".player-1-panel").classList.remove("active");
+  document.querySelector(".player-0-panel").classList.add("active");
+}
+
+function changePlayer() {
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+  currentPlayer === 0 ? (currentPlayer = 1) : (currentPlayer = 0);
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+  //document.querySelector(".dice").style.display = "none";
 }
