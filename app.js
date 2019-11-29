@@ -15,12 +15,16 @@ init();
 //Roll Dice button on click function
 document.querySelector(".btn-roll").addEventListener("click", function() {
   if (gamePlaying) {
-    dice = Math.floor(Math.random() * 6) + 1;
+    var dice = Math.floor(Math.random() * 6) + 1;
     document.querySelector(".dice").style.display = "block";
     document.querySelector(".dice").src = "dice-" + dice + ".png";
 
-    if (dice !== 1) {
-      roundScore = roundScore + dice;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
+    document.querySelector(".dice2").style.display = "block";
+    document.querySelector(".dice2").src = "dice-" + dice2 + ".png";
+
+    if (dice !== 1 && dice2 !== 1) {
+      roundScore = roundScore + dice + dice2;
       document.getElementById(
         "current-" + currentPlayer
       ).textContent = roundScore;
@@ -80,6 +84,7 @@ function init() {
 
   //Hide dice
   document.querySelector(".dice").style.display = "none";
+  document.querySelector(".dice2").style.display = "none";
 
   document.getElementById("name-0").textContent = "PLAYER 1";
   document.getElementById("name-1").textContent = "PLAYER 2";
