@@ -10,6 +10,8 @@ GAME RULES:
 */
 
 var currentPlayer, roundScore, scores, winningScore, gamePlaying;
+var gameRules =
+  "GAME RULES:\n -The game has 2 players, playing in rounds.\n - In each turn, a player rolls two dices as many times as they whish. Sum of each dice gets added to the ROUND score.\n - BUT, if the player rolls a 1 on either of the dice, all his ROUND score gets lost. After that, it's the next player's turn.\n - The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn.\n - The first player to reach winning score(players can set winning score for each game at the beginning of the match) on GLOBAL score wins the game";
 init();
 
 //Roll Dice button on click function
@@ -53,6 +55,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
         .classList.remove("active");
       document.getElementById("name-" + currentPlayer).textContent = "WINNER!";
       document.querySelector(".dice").style.display = "none";
+      document.querySelector(".dice2").style.display = "none";
       gamePlaying = false;
     } else {
       changePlayer();
@@ -64,9 +67,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
 document.querySelector(".btn-new").addEventListener("click", init);
 
 document.querySelector(".btn-rules").addEventListener("click", function() {
-  window.alert(
-    "GAME RULES:\n -The game has 2 players, playing in rounds.\n - In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score.\n - BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn.\n - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn.\n - The first player to reach winning score(players can set winning score for each game) on GLOBAL score wins the game"
-  );
+  window.alert(gameRules);
 });
 
 function init() {
@@ -94,9 +95,9 @@ function init() {
   document.querySelector(".player-0-panel").classList.remove("active");
   document.querySelector(".player-1-panel").classList.remove("active");
   document.querySelector(".player-0-panel").classList.add("active");
-  // setTimeout(function() {
-  //   winningScore = window.prompt("Please enter the winning score");
-  // }, 1000);
+  setTimeout(function() {
+    winningScore = window.prompt("Please enter the winning score");
+  }, 1000);
 }
 
 function changePlayer() {
