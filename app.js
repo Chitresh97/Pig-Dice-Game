@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var currentPlayer, roundScore, scores, gamePlaying;
+var currentPlayer, roundScore, scores, winningScore, gamePlaying;
 init();
 
 //Roll Dice button on click function
@@ -40,7 +40,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
     document.getElementById("score-" + currentPlayer).textContent =
       scores[currentPlayer];
 
-    if (scores[currentPlayer] >= 20) {
+    if (scores[currentPlayer] >= winningScore) {
       document
         .querySelector(".player-" + currentPlayer + "-panel")
         .classList.add("winner");
@@ -83,6 +83,9 @@ function init() {
   document.querySelector(".player-0-panel").classList.remove("active");
   document.querySelector(".player-1-panel").classList.remove("active");
   document.querySelector(".player-0-panel").classList.add("active");
+  setTimeout(function() {
+    winningScore = window.prompt("Please enter the winning score");
+  }, 1000);
 }
 
 function changePlayer() {
